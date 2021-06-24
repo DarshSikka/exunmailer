@@ -1,0 +1,22 @@
+{
+  "name": "exunmail",
+  "version": "1.0.0",
+  "description": "Mails to notify for exunclan official website",
+  "main": "index.js",
+  "scripts": {
+    "dev":"nodemon index.js",
+    "start":"node index.js"
+  },
+  "author": "Darsh Sikka",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "nodemailer": "^6.6.2"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0"
+  }
+}
