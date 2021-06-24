@@ -4,8 +4,8 @@
   "description": "Mails to notify for exunclan official website",
   "main": "index.js",
   "scripts": {
-    "dev":"nodemon index.js",
-    "start":"node index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "author": "Darsh Sikka",
   "license": "ISC",
@@ -13,7 +13,7 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mysql": "^2.18.1",
+    "mongoose": "^5.12.14",
     "nodemailer": "^6.6.2"
   },
   "devDependencies": {

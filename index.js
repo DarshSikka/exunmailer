@@ -1,17 +1,14 @@
 const express=require("express");
-const mysql=require("mysql");
+const port=process.env.PORT||5001
 const cors=require("cors");
 const bodyParser=require("body-parser");
+const User=require("./Models/User");
 require("dotenv").config();
-const port=process.env.PORT || 3000;
-const details={
-    host:process.env.DB_HOST,
-    user:process.env.DB_USER,
-    port:process.env.DB_PORT,
-    password:process.env.DB_PASSWORD
-}
-const conn=mysql.createConnection(details); 
-conn.query('USE emails');
+const mongoose=require("mongoose");
+mongoose.connect(process.env.DB_URI, {useUnifiedTopology:true, useNewUrlParser:true}).then((err, result)=>{
+    if(err) throw err 
+    console.log("connection established");
+})
 const app=express();
 app.use(cors());
 app.use(express.static("Public"));
@@ -19,10 +16,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.get("/addmail", cors(), (req, res)=>{
     const {email}=req.query;
-    conn.query(`INSERT INTO contents(email) values("${email}");`, (err, result)=>{
-        if(err) throw err;
-        res.send("CREATED");
-    })
+    const NewMail=new User({email});
+    NewMail.save().then(res=>console.log(res)); 
+    res.send("saved");
 });
-app.use("/notify", require("./Notify/router.js"))
+app.use("/notify", require("./Notify/router.js"));
 app.listen(port, console.log(`API started on port ${port}`))
