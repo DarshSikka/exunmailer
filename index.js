@@ -16,9 +16,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.get("/addmail", cors(), (req, res)=>{
     const {email}=req.query;
-    const NewMail=new User({email});
-    NewMail.save().then(res=>console.log(res)); 
-    res.send("saved");
-});
+    User.findOne({email}, (err, result)=>{
+        if(result){
+            console.log(result);
+            res.send("already there");
+        }
+        else{
+            const NewMail=new User({email});
+            NewMail.save().then(re=>console.log(re));  
+            res.send("saved")
+        }
+    }
+    ).then(result=>console.log(result)).catch(console.error);
+}
+    );
 app.use("/notify", require("./Notify/router.js"));
 app.listen(port, console.log(`API started on port ${port}`))
