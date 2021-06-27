@@ -11,7 +11,7 @@ const send=async(people, notificationashtml, subject)=>{
     const mail=await transport.sendMail({
         name:"mailgun.com",
         from: process.env.EMAIL_ADDRESS,
-        to:people,
+        bcc:people,
         subject,
         html:notificationashtml
     });
